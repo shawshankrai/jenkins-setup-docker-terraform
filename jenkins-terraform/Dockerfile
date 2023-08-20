@@ -10,8 +10,8 @@ ENV JENKINS_USER admin
 ENV JENKINS_PASS admin
 
 # install Terraform gcloud
-RUN apt-get update \
-	&& apt-get install -y git curl wget python3 bash \
+RUN apk update \
+	&& apk add -y git curl wget python3 bash \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/bin && \
