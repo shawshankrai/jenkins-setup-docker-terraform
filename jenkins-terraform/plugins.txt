@@ -1,0 +1,7 @@
+git
+matrix-auth
+maven-plugin
+terraform
+workflow-aggregator
+github
+gcp-secrets-manager-credentials-provider
