@@ -23,7 +23,7 @@ ENV PATH=$PATH:/root/google-cloud-sdk/bin
 
 # install jenkins plugins
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 # Jenkins runs all grovy files from init.groovy.d dir
 # use this for creating default admin user
