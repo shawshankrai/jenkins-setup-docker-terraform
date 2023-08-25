@@ -1,6 +1,0 @@
-FROM hashicorp/terraform
-
-
-
-
-
