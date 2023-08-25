@@ -13,7 +13,7 @@ pipeline {
                     set +x
                     HOME=$WORKSPACE
                     gcloud auth activate-service-account --key-file $SECRET_JSON
-                    gcloud config set project terraform-gcp-382215
+                    gcloud config set project terraform-gcp
                     gcloud --version
                     '''
                 }
