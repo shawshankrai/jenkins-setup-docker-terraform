@@ -1,5 +1,10 @@
 pipeline {
     agent { dockerfile true }
+
+    environment {
+        GOOGLE_IMPERSONATE_SERVICE_ACCOUNT = "terraform-gcp@terraform-gcp-382215.iam.gserviceaccount.com"
+    }
+    
     stages {
         stage('Deploy') {
             steps {
