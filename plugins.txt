@@ -4,4 +4,4 @@ maven-plugin
 terraform
 workflow-aggregator
 github
-gcp-secrets-manager-credentials-provider
+docker-workflow

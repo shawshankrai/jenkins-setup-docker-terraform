@@ -11,15 +11,11 @@ ENV JENKINS_PASS admin
 
 # install Terraform gcloud
 RUN apt-get update \
-	&& apt-get install -y git curl wget python3 bash \
+	&& apt-get install -y curl wget \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/bin && \
-	curl -sSL https://sdk.cloud.google.com | bash && \
 	rm -rf /terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-
-# Adding the package path to local
-ENV PATH=$PATH:/root/google-cloud-sdk/bin
 
 # install jenkins plugins
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
