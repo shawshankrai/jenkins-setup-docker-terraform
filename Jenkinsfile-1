@@ -6,7 +6,7 @@ pipeline {
         }
     }
     tools {
-       terraform 'terraform'
+       terraform 'terraform-15'
     }
     stages {
         stage('Deploy') {
@@ -40,7 +40,7 @@ pipeline {
                 sh 'terraform init'
             }
         }
-        
+
         stage('terraform apply') {
             steps{
                 sh 'terraform apply --auto-approve'
