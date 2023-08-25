@@ -1,12 +1,23 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
-  stages {
-    stage('Test') {
-      steps {
-        sh 'node --version'
-      }
+    agent {
+        docker { 
+            image 'registry.hub.docker.com/google/cloud-sdk:alpine' 
+            args '-v $HOME:/home -w /home'    
+        }
     }
-  }
+    stages {
+        stage('Deploy') {
+            steps {
+                withCredentials([file(credentialsId: 'key-sa', variable: 'SECRET_JSON')]) {
+                    sh '''
+                    set +x
+                    HOME=$WORKSPACE
+                    gcloud auth activate-service-account --key-file $SECRET_JSON
+                    gcloud config set project terraform-gcp-382215
+                    gcloud --version
+                    '''
+                }
+            }
+        }
+    }
 }

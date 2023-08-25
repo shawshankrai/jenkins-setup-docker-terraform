@@ -15,7 +15,12 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/bin && \
-	rm -rf /terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+	rm -rf /terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+	wget http://get.docker.com/builds/Linux/x86_64/docker-latest.tgz && \
+	tar -xvzf docker-latest.tgz && \
+	mv docker/* /usr/bin/ && \
+	rm -rf /docker-latest.tgz
+
 
 # install jenkins plugins
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
@@ -24,6 +29,3 @@ RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 # Jenkins runs all grovy files from init.groovy.d dir
 # use this for creating default admin user
 COPY default-user.groovy /usr/share/jenkins/ref/init.groovy.d/
-
-# volume for Jenkins settings
-VOLUME /var/jenkins_home
