@@ -1,17 +1,5 @@
 pipeline {
-    agent {
-        docker { 
-            image 'registry.hub.docker.com/google/cloud-sdk:alpine' 
-            args '-v $HOME:/home -w /home'    
-        }
-    }
-    environment {
-        TERRAFORM_HOME = tool name: 'terraform-15', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
-        PATH = "${TERRAFORM_HOME}/bin:${env.PATH}"
-    }
-    tools {
-       terraform 'terraform-15'
-    }
+    agent { dockerfile true }
     stages {
         stage('Deploy') {
             steps {
