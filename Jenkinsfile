@@ -34,8 +34,10 @@ pipeline {
         }
 
         stage('terraform apply') {
-            steps{
-                sh 'terraform apply --auto-approve'
+            steps {
+                withCredentials([file(credentialsId: 'key-sa', variable: 'SECRET_JSON')]) {
+                    sh 'terraform apply --auto-approve'
+                }
             }
         }
     }
