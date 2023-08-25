@@ -2,6 +2,8 @@ FROM google/cloud-sdk
 
 USER root
 
+ENV TERRAFORM_VERSION=1.5.5
+
 RUN apt-get update \
 	&& apt-get install -y curl wget \
 	&& rm -rf /var/lib/apt/lists/* \
