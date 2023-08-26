@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         SVC_ACCOUNT_KEY = credentials('terraform-auth')
-        SUB_MODULE = '/create-bucket/'
+        SUB_MODULE = '/create-bucket/*'
 
     }
 
@@ -24,6 +24,7 @@ pipeline {
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
                 sh "ls -ltr"
+                sh "ls -ltr create-bucket/*"
                 sh 'mkdir -p creds' 
                 sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
           }
