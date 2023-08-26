@@ -20,7 +20,7 @@ pipeline {
                 branches: [[name: '*/main']],
                 extensions: [
                     [$class: 'SparseCheckoutPaths', 
-                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'${SUB_MODULE}']]]
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/create-bucket']]]
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
                 sh "ls -ltr"
