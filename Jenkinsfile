@@ -15,7 +15,7 @@ pipeline {
            steps{
                 git branch: 'main', url: 'https://github.com/shawshankrai/google-data-eng.git'
                 sh 'mkdir -p creds' 
-                sh 'base64 $SVC_ACCOUNT_KEY > ./creds/serviceaccount.json'
+                sh 'base64 -d $SVC_ACCOUNT_KEY > ./creds/serviceaccount.json'
             }
         }
 
