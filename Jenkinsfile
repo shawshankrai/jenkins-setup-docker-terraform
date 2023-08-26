@@ -23,6 +23,7 @@ pipeline {
                     sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'${SUB_MODULE}']]]
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
+                sh "ls -ltr"
                 sh 'mkdir -p creds' 
                 sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
           }
