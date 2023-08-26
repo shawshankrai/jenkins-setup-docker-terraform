@@ -13,7 +13,10 @@ pipeline {
     stages {
         stage('Git checkout') {
            steps{
-                git branch: 'main', url: 'https://github.com/shawshankrai/google-data-eng.git'
+                checkout scmGit(
+                    branches: [[name: 'main']],
+                    userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]
+                )
                 sh 'mkdir -p creds' 
                 sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
             }
