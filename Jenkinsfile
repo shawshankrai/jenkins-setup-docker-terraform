@@ -26,36 +26,21 @@ pipeline {
           }
         }
 
-        stage('mkdir') {
+        stage('Save Cred') {
             steps {
               sh'mkdir -p creds'
               sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'  
             }
         }
 
-        stage('change dir') {
+        stage('Terraform deploy') {
             steps {
               dir('create-bucket') {
                   sh'ls -la'
+                  sh 'terraform fmt'
+                  sh 'terraform init'
+                  sh 'terraform apply --auto-approve'
               }
-            }
-        }
-
-        stage('terraform format check') {
-            steps{
-                sh 'terraform fmt'
-            }
-        }
-
-        stage('terraform Init') {
-            steps{
-                sh 'terraform init'
-            }
-        }
-
-        stage('terraform apply') {
-            steps{
-                sh 'terraform apply --auto-approve'
             }
         }
     }
