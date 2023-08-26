@@ -9,6 +9,7 @@ pipeline {
     environment {
         SVC_ACCOUNT_KEY = credentials('terraform-auth')
         SUB_MODULE = '/create-bucket'
+        SUB_DIR = "create-bucket"
 
     }
 
@@ -35,7 +36,7 @@ pipeline {
 
         stage('Terraform deploy') {
             steps {
-              dir("${env.SUB_MODULE}") {
+              dir("${env.SUB_DIR}") {
                   sh'ls -la'
                   sh 'terraform fmt'
                   sh 'terraform init'
