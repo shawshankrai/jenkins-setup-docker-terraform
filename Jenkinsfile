@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         SVC_ACCOUNT_KEY = credentials('terraform-auth')
-        SUB_MODULE = '/create-bucket'
+        SUB_MODULE = '/create-bucket/'
 
     }
 
