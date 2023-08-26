@@ -8,19 +8,25 @@ pipeline {
 
     environment {
         SVC_ACCOUNT_KEY = credentials('terraform-auth')
+        SUB_MODULE = '/create-bucket'
+
     }
 
     stages {
-        stage('Git checkout') {
-           steps{
-                checkout scmGit(
-                    branches: [[name: 'main']],
-                    userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]
-                )
-                sh 'cd create-bucket'
+
+        stage('Checkout') {
+            steps {
+              checkout([$class: 'GitSCM', 
+                branches: [[name: '*/main']],
+                extensions: [
+                    [$class: 'SparseCheckoutPaths', 
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'${SUB_MODULE}']]]
+                    ],
+                userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
+               sh 'cd create-bucket'
                 sh 'mkdir -p creds' 
                 sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
-            }
+          }
         }
 
         stage('terraform format check') {
