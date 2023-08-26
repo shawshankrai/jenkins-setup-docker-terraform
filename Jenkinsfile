@@ -24,7 +24,7 @@ pipeline {
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
                 sh "ls -ltr"
-                sh "cd ./create-bucket"
+                sh "pwd"
                 sh 'mkdir -p creds' 
                 sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
           }
