@@ -23,13 +23,22 @@ pipeline {
                     sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/create-bucket']]]
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
-                sh "pwd"
-                sh "ls -ltr"
-                sh 'cd ./create-bucket'
-                sh "pwd"
-                sh 'mkdir -p creds' 
-                sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
           }
+        }
+
+        stage('mkdir') {
+            steps {
+              sh'mkdir -p creds'
+              sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'  
+            }
+        }
+
+        stage('change dir') {
+            steps {
+              dir('create-bucket') {
+                  sh'ls -la'
+              }
+            }
         }
 
         stage('terraform format check') {
