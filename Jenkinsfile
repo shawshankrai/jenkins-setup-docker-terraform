@@ -23,6 +23,7 @@ pipeline {
                     sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/create-bucket']]]
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
+                sh "pwd"
                 sh "ls -ltr"
                 sh 'cd ./create-bucket'
                 sh "pwd"
