@@ -20,7 +20,7 @@ pipeline {
                 branches: [[name: '*/main']],
                 extensions: [
                     [$class: 'SparseCheckoutPaths', 
-                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/create-bucket']]]
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'$SUB_MODULE']]]
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/shawshankrai/google-data-eng.git']]])
           }
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Terraform deploy') {
             steps {
-              dir('create-bucket') {
+              dir('$SUB_MODULE') {
                   sh'ls -la'
                   sh 'terraform fmt'
                   sh 'terraform init'
